@@ -29,5 +29,26 @@ namespace OopPractice.Abstraction;
 
 // Write your code below this line:
 
+public abstract class ProductBase
+{
+    public string Name { get; }
+    public decimal Price { get; }
 
+    protected ProductBase(string name, decimal price)
+    {
+        if (string.IsNullOrWhiteSpace(name))
+        {
+            throw new ArgumentException("Name cannot be null or empty.");
+        }
+        if (price < 0)
+        {
+            throw new ArgumentException("Price cannot be negative.");
+        }
+
+        Name = name;
+        Price = price;
+    }
+
+    public abstract decimal CalculateFinalPrice();
+}
 
