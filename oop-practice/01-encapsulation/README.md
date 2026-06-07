@@ -57,3 +57,19 @@ hiding implementation details means outside code should know what your class can
 | `internal`           | Accessible only inside the same project/assembly                                             |
 | `protected internal` | Accessible inside the same project/assembly **or** from child classes                        |
 | `private protected`  | Accessible inside the same class or child classes, but only within the same project/assembly |
+
+
+
+A class is a blueprint for creating objects.
+
+It defines:
+
+Data an object can have
+Behaviour an object can do
+So the simple definition is:
+
+A class is a template or blueprint that defines the properties and methods that its objects will have.
+
+Interview version:
+
+A class is a user-defined type that encapsulates data and behaviour into a single unit.
