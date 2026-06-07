@@ -19,10 +19,13 @@ Work through them in order — your instructor (Copilot) will guide each session
 | 4 | Generics & Constraints | `04-generics/` | Not started |
 | 5 | Nullable Reference Types & null safety | `05-nullable-reference-types/` | Not started |
 | 6 | Delegates, `Func`/`Action` & Events | `06-delegates-and-events/` | Not started |
-| 7 | Collections & Iteration (`IEnumerable`, `yield`) | `07-collections-and-iteration/` | Not started |
+| 7 | Collections & Iteration (`array`, `List`, `Dictionary`, `HashSet`, `yield`) | `07-collections-and-iteration/` | Not started |
 | 8 | Exceptions & Error Handling | `08-exceptions-and-error-handling/` | Not started |
 | 9 | Extension Methods | `09-extension-methods/` | Not started |
 | 10 | Equality, Comparison & Operators | `10-equality-and-comparison/` | Not started |
+| 11 | Enums (incl. `[Flags]`) | `11-enums/` | Not started |
+| 12 | Boxing, Unboxing, Casting & Conversions | `12-boxing-casting-conversions/` | Not started |
+| 13 | Unit Testing with xUnit | `13-unit-testing-xunit/` | Not started |
 
 ## Domain Context
 All exercises use the **Product Catalogue** domain — treated as one microservice in a larger DDD platform:

@@ -111,6 +111,9 @@ Append this under the "Session Log" heading of the matching progress file:
 | 8 | Exceptions & Error Handling | `csharp-practice/08-exceptions-and-error-handling/` |
 | 9 | Extension Methods | `csharp-practice/09-extension-methods/` |
 | 10 | Equality, Comparison & Operators | `csharp-practice/10-equality-and-comparison/` |
+| 11 | Enums (incl. `[Flags]`) | `csharp-practice/11-enums/` |
+| 12 | Boxing, Unboxing, Casting & Conversions | `csharp-practice/12-boxing-casting-conversions/` |
+| 13 | Unit Testing with xUnit | `csharp-practice/13-unit-testing-xunit/` |
 
 ### ASP.NET API track — `aspnet-practice/`
 | # | Topic | Folder |
