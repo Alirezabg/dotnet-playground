@@ -169,3 +169,25 @@ Easy interview answer
 You can say:
 
 Dependency Inversion means high-level classes should depend on abstractions, not concrete implementations. For example, ProductService should depend on IProductRepository, not directly on SqlProductRepository. Dependency Injection is one way to achieve this by passing the dependency into the constructor, often using the built-in DI container in ASP.NET Core.
+
+
+DIP: Dependency Inversion Principle
+
+DIP is a design principle.
+
+It says:
+
+High-level modules should not depend on low-level modules.
+Both should depend on abstractions.
+
+DI: Dependency Injection
+
+DI is a technique.
+
+It means:
+
+Instead of a class creating its own dependency, the dependency is given to it from the outside.
+
+Dependency Inversion means high-level classes should depend on abstractions, not concrete implementations. For example, ProductService should depend on IProductRepository, not directly on SqlProductRepository. Dependency Injection is one way to achieve this by passing the dependency into the constructor, often using the built-in DI container in ASP.NET Core.
+
+this improves testing
