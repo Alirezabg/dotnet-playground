@@ -56,3 +56,111 @@ Before coding, answer:
 - "How do you handle exceptions from `Task.WhenAll`?"
 - "How do you prevent one slow consumer from blocking the thread pool?"
 - "What is the Outbox Pattern and how does async fit into it?"
+
+
+Async/await is how C# lets us do I/O work without blocking a thread.
+
+For example, when an API calls a database, the thread does not need to sit there waiting. It can return to the thread pool and serve another request. When the database result comes back, the rest of the method continues.
+
+In interviews, the key idea is:
+
+async/await does not make CPU work faster. It makes waiting for I/O scalable.
+
+
+Task A — Async All The Way Down
+A synchronisation context is an object that decides where the continuation after an await should run.
+
+await Task.WhenAll(...) propagates failure. If I need every exception, I keep a reference to the combined task and inspect its Exception.InnerExceptions.
+Task.WhenAll waits for all tasks to finish.
+Task.WhenAny waits until the first task finishes.
+
+OperationCanceledException represents cooperative cancellation. It usually means the caller no longer wants the result, not that the application failed.
+
+using CancellationTokenSource cts = new();
+
+cts.Cancel();
+
+
+Important Interview Concepts
+Task<T>
+
+A Task<T> represents future work that will eventually produce a result.
+
+Task<Product> GetProductAsync(Guid id, CancellationToken ct)
+
+This means:
+
+This method will eventually return a Product.
+
+
+Task
+
+A Task represents future work with no return value.
+
+Task SaveProductAsync(Product product, CancellationToken ct)
+
+This means:
+
+This method does async work but does not return a value.
+
+
+async
+
+The async keyword allows the method to use await.
+
+public async Task<Product> GetProductAsync(Guid id, CancellationToken ct)
+{
+    Product product = await _repository.GetByIdAsync(id, ct);
+
+    return product;
+}
+
+Important:
+
+async does not mean “run on another thread.”
+
+It means the method can pause at an await point and resume later.
+
+
+await
+
+await means:
+
+Wait asynchronously for this task to complete, without blocking the current thread.
+
+This is good:
+
+Product product = await _repository.GetByIdAsync(id, ct);
+
+This is bad:
+
+Product product = _repository.GetByIdAsync(id, ct).Result;
+
+
+Outbox Pattern
+What problem does the Outbox Pattern solve?
+
+Imagine this code:
+
+await _db.SaveChangesAsync(ct);
+await _messageBus.PublishAsync(productCreatedEvent, ct);
+
+Problem:
+
+What if the database save succeeds, but publishing to RabbitMQ fails?
+
+Then your database says:
+
+Product was created.
+
+But RabbitMQ never receives:
+
+ProductCreatedEvent
+
+Your system becomes inconsistent.
+
+What you should say in an interview
+
+Use this as your compact answer:
+
+In C#, async/await is mainly for non-blocking I/O. I avoid .Result and .Wait() because they block thread-pool threads and can cause deadlocks or thread-pool starvation. I propagate CancellationToken through every async call so the caller can cancel work cooperatively. For concurrent operations I use Task.WhenAll, and if I need all exceptions I inspect the combined task’s Exception.InnerExceptions. I avoid async void except for event handlers. For high-volume async work, I use bounded concurrency with SemaphoreSlim, ch
