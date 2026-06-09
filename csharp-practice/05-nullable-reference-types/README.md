@@ -20,3 +20,45 @@ Write your code below in a new `.cs` file in this folder.
 
 ## Interview Tip
 > In safety-critical software, null guards belong at the **boundary** (constructors, API input). Inside the domain, types should already guarantee non-null.
+
+
+Nullable Reference Types do not change runtime behaviour by themselves. They are a compile-time safety feature.
+
+They help the compiler warn you when a reference value might be null.
+
+For example:
+
+string name = null;        // Warning
+string? description = null; // OK
+
+Null-forgiving operator !
+
+The ! operator tells the compiler:
+
+“Trust me, this value is not null.”
+
+
+string? possibleName = GetNameFromApi();
+
+string name = possibleName!;
+Console.WriteLine(name.Length);
+
+This removes the compiler warning, but it does not check anything at runtime.
+
+Description ?? Name
+
+means:
+
+Use Description if it is not null. Otherwise use Name.
+
+Description?.Length
+
+means:
+
+Get Length only if Description is not null.
+
+Description ??= "No description provided.";
+
+means:
+
+If Description is null, assign this default value.
