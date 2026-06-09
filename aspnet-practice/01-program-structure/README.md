@@ -1,21 +1,21 @@
-# Topic 1 — Project Structure & `Program.cs`
+# Topic 1 — Project Structure & `Program.cs` (MVC)
 
 **Interview definition (fill this in yourself before asking Copilot):**
 
-> _Your answer here... (What does `WebApplication.CreateBuilder` set up? What's the builder → build → run lifecycle?)_
+> _Your answer here... (What does `WebApplication.CreateBuilder` set up? What's the builder → build → run lifecycle, and where do controllers plug in?)_
 
 ## Your Task
-Sketch the entry point for the Product Catalogue API.
-- Create the `WebApplicationBuilder`, register services, build the app, map a health endpoint, run
-- Explain the order: service registration **before** `Build()`, middleware/endpoints **after**
-- Map a single `GET /` that returns the service name and version
+Sketch the entry point for the Product Catalogue API using **MVC controllers**.
+- Create the `WebApplicationBuilder`, call `AddControllers()`, build the app, `MapControllers()`, run
+- Explain the order: service registration **before** `Build()`, middleware/`MapControllers` **after**
+- Add a simple `HealthController` with `GET /health` that returns the service name and version
 
-Write your code below in a new `.cs` file in this folder (or describe the structure of `Program.cs`).
+Write your code below in a new `.cs` file in this folder (or describe the structure of `Program.cs` + a controller).
 
 ## Questions Your Instructor Will Ask
 - What's the difference between `builder.Services` and `app` — what can you only do on each side of `Build()`?
 - Where does configuration (`appsettings.json`, environment variables) get loaded, and in what precedence?
-- How does ASP.NET differ from the classic `Startup.cs` Configure/ConfigureServices split?
+- How does the modern minimal hosting model (`Program.cs` with top-level statements) differ from the classic `Startup.cs` `ConfigureServices`/`Configure` split?
 
 ## Interview Tip
 > Know the lifecycle cold: **register services → `Build()` → configure pipeline + map endpoints → `Run()`**. Doing things in the wrong order is a common bug.
@@ -25,6 +25,7 @@ Write your code below in a new `.cs` file in this folder (or describe the struct
 var builder = WebApplication.CreateBuilder(args);
 
 // 1. Register services BEFORE Build()
+builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -37,17 +38,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-// 3. Map endpoints AFTER Build()
-app.MapGet("/", () =>
-{
-    return new
-    {
-        Service = "Product Catalogue API",
-        Version = "1.0.0"
-    };
-});
-
-app.MapGet("/health", () => Results.Ok("Healthy"));
+// 3. Map controller routes AFTER Build()
+app.MapControllers();
 
 // 4. Start the application
 app.Run();

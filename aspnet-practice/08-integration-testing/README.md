@@ -5,11 +5,11 @@
 > _Your answer here... (What does an integration test prove that a unit test cannot? Where does it sit in the V Model?)_
 
 ## Your Task
-Write an integration test for the products endpoints.
+Write an integration test for the products controller.
 - Spin up the API in-memory with `WebApplicationFactory<Program>`
 - Use the test `HttpClient` to `POST /products` then `GET /products/{id}`
 - Assert the status codes and the round-tripped response body
-- Swap the real repository for an in-memory test double via service override
+- Swap the real repository for an in-memory test double via `WithWebHostBuilder` / `ConfigureTestServices`
 
 Write the test outline below in a new `.cs` file (xUnit). *(Your instructor only sketches test stubs — you fill in the assertions.)*
 

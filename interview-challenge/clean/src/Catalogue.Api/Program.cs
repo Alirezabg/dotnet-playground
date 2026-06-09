@@ -1,5 +1,4 @@
 using Catalogue.Api.Application;
-using Catalogue.Api.Endpoints;
 using Catalogue.Api.Infrastructure;
 using Catalogue.Api.Middleware;
 
@@ -7,6 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // --- Service registration (everything BEFORE Build) ---
 builder.Services.AddSingleton<IProductRepository, InMemoryProductRepository>();
+builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -24,7 +24,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.MapGet("/", () => Results.Ok(new { service = "Catalogue.Api", version = "1.0" }));
-app.MapProducts();
+app.MapControllers();
 
 app.Run();
 

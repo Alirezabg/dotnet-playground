@@ -7,16 +7,16 @@
 ## Your Task
 Validate `CreateProductRequest` before it reaches the domain.
 - Reject empty names, negative prices, and unknown currencies
-- Return `400 Bad Request` with a clear, structured error (e.g. `ValidationProblem`)
+- Return `400 Bad Request` with a clear, structured error (e.g. `ValidationProblem` / `ProblemDetails`)
 - Decide what belongs at the API boundary vs inside the `Product` aggregate's invariants
-- (Optional) Express it as an endpoint filter so the handler stays clean
+- Use `[ApiController]` automatic model validation (DataAnnotations) and/or an action filter so the action body stays clean
 
 Write your code below in a new `.cs` file in this folder.
 
 ## Questions Your Instructor Will Ask
 - What's the difference between *input validation* (API boundary) and *domain invariants* (aggregate)?
 - Should the domain trust the API layer's validation? Why or why not?
-- How does an endpoint filter help keep validation out of the handler body?
+- How does `[ApiController]` automatic 400 model validation work, and when would you add a custom action filter instead?
 
 ## Interview Tip
-> Strong answer: validate *format/shape* at the boundary, but enforce *business rules* inside the aggregate so the domain is always valid regardless of caller.
+> Strong answer: validate *format/shape* at the boundary (DataAnnotations + `[ApiController]` auto-400), but enforce *business rules* inside the aggregate so the domain is always valid regardless of caller.

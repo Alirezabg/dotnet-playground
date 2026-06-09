@@ -23,15 +23,15 @@ Open [`Product.cs`](clean/src/Catalogue.Api/Domain/Product.cs), [`Money.cs`](cle
 7. `Money`'s constructor validates and throws `InvalidMoneyException`. Where is that exception turned into an HTTP 400? *(trace it to [`ExceptionHandlingMiddleware`](clean/src/Catalogue.Api/Middleware/ExceptionHandlingMiddleware.cs))*
 8. What's the risk of the public `Money(decimal, string)` constructor vs a static factory? When would you tighten it?
 
-## Part 3 — API (ASP.NET)
+## Part 3 — API (ASP.NET MVC)
 
-Open [`ProductEndpoints.cs`](clean/src/Catalogue.Api/Endpoints/ProductEndpoints.cs):
+Open [`ProductsController.cs`](clean/src/Catalogue.Api/Controllers/ProductsController.cs):
 
-9. Why `Results<Ok<ProductResponse>, NotFound>` instead of returning `IResult`? What does it give OpenAPI?
-10. Why does `POST` return `201 Created` with a location instead of `200 OK`?
-11. There's validation in the endpoint **and** invariants in the domain. Isn't that duplication? Defend it.
+9. Why `ActionResult<ProductResponse>` instead of returning the object directly? What does it give OpenAPI?
+10. Why does `Create` return `201 Created` (via `CreatedAtAction`) with a location instead of `200 OK`?
+11. There's validation in the controller **and** invariants in the domain. Isn't that duplication? Defend it.
 12. Why map `Product` → `ProductResponse` instead of returning the aggregate? *(see [`ProductDtos.cs`](clean/src/Catalogue.Api/Contracts/ProductDtos.cs))*
-13. What does `MapGroup("/products")` buy you over three separate `MapGet/MapPost` calls?
+13. What does `[ApiController]` + `[Route("products")]` on the controller buy you over wiring each action's route by hand?
 
 ## Part 4 — Testing (V Model)
 
@@ -59,19 +59,19 @@ File: [`GetAllProductsTests.cs`](clean/tests/Catalogue.Tests/Api/GetAllProductsT
 - POST two products, GET `/products`, assert both ids are present.
 - Remove the `Skip`, run `dotnet test`. Which V Model level is this?
 
-### Task B — Add an `Activate` endpoint
+### Task B — Add an `Activate` action
 - Add `POST /products/{id:guid}/activate` that moves a product to `Active`.
-- Decide the responses: `Results<Ok<ProductResponse>, NotFound>`.
+- Decide the responses: `ActionResult<ProductResponse>` with `Ok(...)` or `NotFound()`.
 - Add one integration test for found + not-found.
 - 📌 Think: should "already active" be an error or idempotent?
 
 ### Task C — Add validation for a maximum price
 - Reject prices above a sensible ceiling at the boundary **and** state where the invariant belongs.
-- Add a unit test and an endpoint test for the rejection (expect 400).
+- Add a unit test and an integration test for the rejection (expect 400).
 
 ### Task D — Introduce a `Result<T>` for "not found"
 - Discuss with your coach: exception vs result type for expected "not found".
-- Sketch how `GetByIdAsync` could return a result instead of `null`. What changes in the endpoint?
+- Sketch how `GetByIdAsync` could return a result instead of `null`. What changes in the controller action?
 
 ### Task E — Fix three issues in `code-review/`
 - Pick three from your Part 5 list, fix them, and diff your result against `clean/`.

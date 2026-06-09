@@ -16,7 +16,7 @@ Write your code below in a new `.cs` file in this folder.
 ## Questions Your Instructor Will Ask
 - What goes wrong if you serialize your aggregate root directly to JSON?
 - Why are `record` types a natural fit for DTOs?
-- Where should mapping live, and how do you keep it from leaking domain rules into the API layer?
+- Where should mapping (domain → DTO) live so it doesn't leak domain rules into the controller?
 
 ## Interview Tip
 > "Never leak the domain over the wire." DTOs give you a stable public contract while the domain model evolves freely behind it.

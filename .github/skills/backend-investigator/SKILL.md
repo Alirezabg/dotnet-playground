@@ -1,6 +1,6 @@
 ---
 name: backend-investigator
-description: "C# language and ASP.NET Minimal API investigation and practice for interview prep. Use when starting a new C# topic (records, pattern matching, LINQ, generics, nullable reference types, delegates/events, collections, exceptions, extension methods, equality) or an ASP.NET topic (Program.cs, routing/MapGroup, DTOs, DI, typed results, middleware, validation, integration testing, in-memory repository, OpenAPI), comparing approaches, or wanting guided questions to practice a concept. Always checks progress notes before starting."
+description: "C# language and ASP.NET MVC (controllers) investigation and practice for interview prep. Use when starting a new C# topic (records, pattern matching, LINQ, generics, nullable reference types, delegates/events, collections, exceptions, extension methods, equality) or an ASP.NET topic (Program.cs, attribute routing, DTOs, DI, ActionResult<T>, middleware/filters, validation, integration testing, in-memory repository, OpenAPI), comparing approaches, or wanting guided questions to practice a concept. Always checks progress notes before starting."
 argument-hint: "Name the C# or ASP.NET topic you want to explore"
 ---
 # Backend Investigator — Guided Practice & Investigation
@@ -71,10 +71,10 @@ After each major topic is covered, update the matching progress file (`csharp-pr
 
 ## ASP.NET API Topic Sequence
 1. Project structure & `Program.cs` → `aspnet-practice/01-program-structure/`
-2. Routing & `MapGroup()` → `aspnet-practice/02-routing-and-mapgroup/`
+2. Routing & attribute routing (controllers) → `aspnet-practice/02-routing-and-mapgroup/`
 3. DTOs — record models → `aspnet-practice/03-dtos-and-records/`
 4. Dependency injection → `aspnet-practice/04-dependency-injection/`
-5. `Results<T1, T2>` typed responses → `aspnet-practice/05-typed-results/`
+5. `ActionResult<T>` typed responses → `aspnet-practice/05-typed-results/`
 6. Middleware → `aspnet-practice/06-middleware/`
 7. Validation → `aspnet-practice/07-validation/`
 8. Integration testing (`WebApplicationFactory<T>`) → `aspnet-practice/08-integration-testing/`

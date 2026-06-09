@@ -4,7 +4,7 @@ A self-contained mini-project for interview practice. Two versions of the same P
 
 | Folder | What it is | Use it to |
 |--------|-----------|-----------|
-| [`clean/`](clean/) | A correct, idiomatic .NET 8 Minimal API + xUnit tests | **Read & run** good code; be quizzed on it; extend it |
+| [`clean/`](clean/) | A correct, idiomatic .NET 8 ASP.NET MVC (controllers) API + xUnit tests | **Read & run** good code; be quizzed on it; extend it |
 | [`code-review/`](code-review/) | The same service, deliberately full of bugs/smells | **Review** it like a PR; find the issues; compare to `clean/` |
 
 Study questions and step-by-step "add a test / add an endpoint / add validation" tasks live in [`STUDY.md`](STUDY.md).
@@ -17,12 +17,12 @@ Study questions and step-by-step "add a test / add an endpoint / add validation"
 ```
 clean/
   src/Catalogue.Api/
-    Program.cs                      # builder → services → Build → pipeline → endpoints → Run
+    Program.cs                      # builder → services (AddControllers) → Build → pipeline → MapControllers → Run
     Domain/                         # Product (aggregate), Money + ProductName (value objects), events, exceptions
     Application/IProductRepository   # repository abstraction
     Infrastructure/                 # InMemoryProductRepository (ConcurrentDictionary)
     Contracts/                      # request/response DTOs + mapping
-    Endpoints/ProductEndpoints.cs    # MapGroup, typed Results<T1,T2>, validation
+    Controllers/ProductsController.cs # [ApiController], attribute routing, ActionResult<T>, validation
     Middleware/                     # exception handling (ProblemDetails) + request logging
   tests/Catalogue.Tests/
     Domain/                         # UNIT tests (Product, Money)
@@ -50,6 +50,6 @@ dotnet test code-review/tests/BadCatalogue.Tests/BadCatalogue.Tests.csproj
 1. **Read** `clean/` top to bottom. For each file, ask "why is it done this way?" (use [`STUDY.md`](STUDY.md)).
 2. **Run** the tests; read what each one proves and at which V Model level.
 3. **Complete** the stubbed `GetAllProductsTests` test yourself.
-4. **Review** `code-review/Program.cs` — list every issue before opening [`REVIEW.md`](code-review/REVIEW.md).
+4. **Review** `code-review/` (`Program.cs` + `Controllers/ProductsController.cs`) — list every issue before opening [`REVIEW.md`](code-review/REVIEW.md).
 5. **Extend**: pick a task from `STUDY.md` (add `/categories`, add a `PUT`, add a `Result<T>` pattern) and implement it.
 6. Ask the **Backend Coach** agent or **Coding Instructor** to review your changes.

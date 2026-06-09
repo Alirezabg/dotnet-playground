@@ -1,22 +1,22 @@
-# Topic 5 — `Results<T1, T2>` Typed Responses
+# Topic 5 — `ActionResult<T>` Typed Responses
 
 **Interview definition (fill this in yourself before asking Copilot):**
 
-> _Your answer here... (How do typed results improve over returning `IResult`? What do they give OpenAPI?)_
+> _Your answer here... (How does `ActionResult<T>` improve over returning a raw object or `IActionResult`? What does it give OpenAPI?)_
 
 ## Your Task
-Return precise status codes from a `GET /products/{id}` handler.
-- Use `Results<Ok<ProductResponse>, NotFound>` as the return type
-- Return `TypedResults.Ok(...)` when found, `TypedResults.NotFound()` when not
-- Add a `POST /products` returning `Results<Created<ProductResponse>, BadRequest<string>>`
-- Explain how typed results feed the OpenAPI document automatically
+Return precise status codes from a `ProductsController`.
+- Make `GetById` return `ActionResult<ProductResponse>` — `Ok(...)` when found, `NotFound()` when not
+- Make `Create` return `CreatedAtAction(nameof(GetById), new { id }, response)` for `201 Created`
+- Annotate the actions with `[ProducesResponseType(...)]` for each status code
+- Explain how these attributes feed the OpenAPI document
 
 Write your code below in a new `.cs` file in this folder.
 
 ## Questions Your Instructor Will Ask
-- What's the benefit of `Results<T1, T2>` over returning a plain `IResult`?
-- How do `TypedResults` help generate accurate Swagger/OpenAPI metadata?
-- Which status code belongs to which outcome — and why does `201 Created` need a `Location` header?
+- What's the benefit of `ActionResult<T>` over returning a plain object or `IActionResult`?
+- How do `[ProducesResponseType]` attributes help generate accurate Swagger/OpenAPI metadata?
+- Which status code belongs to which outcome — and why does `CreatedAtAction` / `201 Created` need a `Location` header?
 
 ## Interview Tip
-> Typed results make the *contract* explicit and testable: the compiler and OpenAPI both know exactly which statuses an endpoint can return.
+> `ActionResult<T>` makes the *contract* explicit: the action can return the typed body **or** a status result, and `[ProducesResponseType]` tells OpenAPI exactly which statuses are possible.

@@ -1,12 +1,14 @@
 // ⚠️  CODE REVIEW CHALLENGE
 // This file COMPILES and RUNS, but it is full of problems a reviewer should catch.
-// Read it like a pull request. Note every issue you can find, THEN open REVIEW.md.
+// Read it (with Controllers/ProductsController.cs) like a pull request.
+// Note every issue you can find, THEN open REVIEW.md.
 //
 // Domain: the same Product Catalogue. Pretend a teammate submitted this for review.
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddSingleton<ProductStore>();
+builder.Services.AddControllers();
 
 var app = builder.Build();
 
@@ -23,41 +25,9 @@ app.Use(async (context, next) =>
     }
 });
 
-// Returns the domain objects straight to the client.
-app.MapGet("/products", (ProductStore store) => store.Products);
-
-// 'id' is a loose string; a missing product returns null (HTTP 200 with empty body).
-app.MapGet("/products/{id}", (string id, ProductStore store) =>
-{
-    var product = store.Products.FirstOrDefault(p => p.Id.ToString() == id);
-    return product;
-});
-
-// No validation: negative prices, empty names, and null currency all pass.
-app.MapPost("/products", (Product product, ProductStore store) =>
-{
-    product.Id = Guid.NewGuid();
-    product.CreatedAt = DateTime.Now;
-    store.Products.Add(product);
-    return "ok";
-});
-
-// Blocks on async work (.Wait()) and throws if the product is missing.
-app.MapPost("/products/{id}/reprice", (string id, decimal price, ProductStore store) =>
-{
-    var product = store.Products.First(p => p.Id.ToString() == id);
-    product.Price = price;
-    SaveToDiskAsync(product).Wait();
-    return product;
-});
+app.MapControllers();
 
 app.Run();
-
-static async Task SaveToDiskAsync(Product product)
-{
-    await Task.Delay(10);
-    // pretend to persist
-}
 
 // Anaemic model with public setters — anyone can put it into an invalid state.
 public class Product
