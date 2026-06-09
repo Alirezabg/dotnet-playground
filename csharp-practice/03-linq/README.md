@@ -22,3 +22,29 @@ Write your code below in a new `.cs` file in this folder.
 
 ## Interview Tip
 > Deferred execution is a classic gotcha. Be ready to explain why iterating a query inside a loop can cause repeated database hits.
+
+
+LINQ is a C# feature for querying collections using a readable, SQL-like style. With IEnumerable<T>, LINQ runs in memory against objects. With IQueryable<T>, LINQ builds an expression tree that can be translated by a provider, such as EF Core, into SQL.
+
+Deferred execution means a LINQ query is not executed when you define it. It runs only when you enumerate it, for example with foreach, .ToList(), .Count(), .First(), or .Any().
+
+When is a LINQ query executed?
+
+This does not execute immediately:
+
+
+IEnumerable<T>
+
+Used for in-memory collections:
+
+
+IQueryable<T>
+
+Used when the query can be translated by a provider:
+
+
+LINQ queries usually use deferred execution. Defining the query does not run it. It runs when we enumerate it, for example with foreach, ToList, Count, or First.
+
+With IEnumerable, LINQ works against in-memory objects. With IQueryable, LINQ builds an expression tree that a provider like EF Core can translate into SQL. That means the same-looking LINQ query may either run in memory or run in the database.
+
+A common performance issue is calling ToList() too early or multiple times. With EF Core, that can cause unnecessary database queries or load more data than needed.

@@ -20,3 +20,6 @@ Write your code below in a new `.cs` file in this folder.
 
 ## Interview Tip
 > Show you can combine patterns: `{ Price: < 10, Category.Name: "Books" }`. Property + relational patterns together is a strong signal.
+
+
+Pattern matching in C# means checking whether an object/value has a certain shape, type, or value, then handling it directly.
