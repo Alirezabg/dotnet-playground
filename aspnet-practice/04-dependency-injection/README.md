@@ -16,7 +16,7 @@ Write your code below in a new `.cs` file in this folder.
 ## Questions Your Instructor Will Ask
 - What's the difference between `Singleton`, `Scoped`, and `Transient`? Give a real example of each.
 - What is a *captive dependency*, and why is injecting a scoped service into a singleton dangerous?
-- How does Minimal API know which handler parameters come from DI vs the route/body?
+- How does ASP.NET know which handler parameters come from DI vs the route/body?
 
 ## Interview Tip
 > Captive dependencies are a favourite trap: a `Scoped` service captured by a `Singleton` lives too long and breaks per-request isolation (e.g. a shared `DbContext`).

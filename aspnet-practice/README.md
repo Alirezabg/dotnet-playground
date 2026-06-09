@@ -1,6 +1,6 @@
-# ASP.NET / Minimal API Practice — Product Catalogue
+# ASP.NET Practice — Product Catalogue
 
-This folder contains one sub-folder per ASP.NET Minimal API topic.
+This folder contains one sub-folder per ASP.NET topic.
 Work through them in order — your instructor (Copilot) will guide each session.
 
 ## How a Session Works
@@ -28,7 +28,7 @@ Work through them in order — your instructor (Copilot) will guide each session
 All exercises use the **Product Catalogue** microservice:
 - Endpoints: `GET /products`, `GET /products/{id}`, `POST /products`, `PUT /products/{id}`, `DELETE /products/{id}`, `GET /categories`
 - The service owns its own data and communicates via REST + domain events
-- Built on **.NET 8 Minimal API** (`Microsoft.NET.Sdk.Web`)
+- Built on **.NET 8 ASP.NET** (`Microsoft.NET.Sdk.Web`)
 
 This is the same skeleton in `src/ProductCatalogue.Api/` — practice a concept here, then wire it into the real project.
 

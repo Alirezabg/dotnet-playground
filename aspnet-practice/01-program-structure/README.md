@@ -15,7 +15,7 @@ Write your code below in a new `.cs` file in this folder (or describe the struct
 ## Questions Your Instructor Will Ask
 - What's the difference between `builder.Services` and `app` — what can you only do on each side of `Build()`?
 - Where does configuration (`appsettings.json`, environment variables) get loaded, and in what precedence?
-- How does Minimal API differ from the classic `Startup.cs` Configure/ConfigureServices split?
+- How does ASP.NET differ from the classic `Startup.cs` Configure/ConfigureServices split?
 
 ## Interview Tip
 > Know the lifecycle cold: **register services → `Build()` → configure pipeline + map endpoints → `Run()`**. Doing things in the wrong order is a common bug.

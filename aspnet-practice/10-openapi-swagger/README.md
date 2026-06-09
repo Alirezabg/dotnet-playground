@@ -6,7 +6,7 @@
 
 ## Your Task
 Document the Product Catalogue API.
-- Enable OpenAPI document generation for the Minimal API
+- Enable OpenAPI document generation for the ASP.NET API
 - Annotate endpoints with `.WithName(...)`, `.WithTags(...)`, and `.Produces<T>(...)`
 - Show how typed results (Topic 5) make the generated schema accurate without extra work
 - Describe how a frontend or another service consumes the resulting document
