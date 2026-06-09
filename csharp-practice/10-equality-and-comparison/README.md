@@ -20,3 +20,24 @@ Write your code below in a new `.cs` file in this folder.
 
 ## Interview Tip
 > Tie it back to DDD: **entities compare by identity, value objects compare by value**. Records default to value equality, which is wrong for entities.
+
+
+Equality means deciding whether two objects should be treated as the same.
+
+There are three common types:
+
+Reference equality means two variables point to the exact same object in memory.
+
+Value equality means two objects are equal because their data is the same.
+
+Identity equality means two entities are equal because they have the same unique identity, usually an Id.
+
+Why Equals and GetHashCode must agree
+
+This rule is very important:
+
+If two objects are equal, they must return the same hash code.
+
+For Product, equality uses Id.
+
+So GetHashCode() must also use Id.
