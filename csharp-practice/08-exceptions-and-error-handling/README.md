@@ -20,3 +20,9 @@ Write your code below in a new `.cs` file in this folder.
 
 ## Interview Tip
 > Strong answer: *"Exceptions for the exceptional; result types for expected outcomes like validation or not-found."* Then trace the failure path.
+
+
+Exceptions are for unexpected or exceptional failures that stop the current operation from safely continuing. Result types or try-patterns are better for expected outcomes, like validation errors, missing data, or user input mistakes.
+
+In domain code, I throw when an invariant would be broken, for example creating a Product with an empty name. But for normal business outcomes like “product not found”, I prefer Result<T>, bool Try..., or nullable return values so the caller handles it as part of normal flow.
+
