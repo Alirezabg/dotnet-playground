@@ -20,3 +20,8 @@ Write your code below in a new `.cs` file in this folder.
 
 ## Interview Tip
 > On a controller, the `[Route]` prefix plus `[HttpGet]`/`[HttpPost]` attributes are where you describe routes; controller-level attributes (`[Authorize]`, `[Tags]`, filters) apply to every action. Mention route constraints as cheap, early input validation.
+
+
+Endpoint routing is the ASP.NET Core system that matches an incoming HTTP request to an endpoint/action based on the URL, HTTP verb, and route template. In controller APIs, [Route] defines the shared route pattern, and [HttpGet], [HttpPost], etc. define which HTTP method and sub-route map to each action. Attribute routing makes routes explicit and close to the controller code.
+
+In controller-based APIs, endpoint routing builds a list of endpoints from controller attributes. [Route("products")] gives the controller a shared route prefix, and [HttpGet], [HttpPost], and other HTTP attributes map specific actions to verbs and templates. A route constraint like {id:guid} means the action only matches when the route value is a valid Guid. For shared behaviour like authorization, tags, or filters, I can put attributes at controller level so they apply to every action.
