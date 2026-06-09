@@ -20,3 +20,8 @@ Write your code below in a new `.cs` file in this folder.
 
 ## Interview Tip
 > Enums are not validated on cast — `(ProductStatus)99` compiles and runs. In safety-critical code, validate with `Enum.IsDefined` (or a switch) at the boundary.
+
+
+An enum is a value type that represents a fixed set of named values. By default, an enum is backed by an int, but you can choose another integral type like byte, short, or long.
+
+Use an enum when a value can only be one of a known set of options, such as product status. It is better than string constants because it gives compile-time safety, avoids spelling mistakes, and makes the code easier to read.
