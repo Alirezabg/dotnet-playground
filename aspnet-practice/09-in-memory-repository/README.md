@@ -20,3 +20,16 @@ Write your code below in a new `.cs` file in this folder.
 
 ## Interview Tip
 > This is the **Dependency Inversion Principle** paying off: depend on the abstraction and you can swap a real DB for an in-memory fake at test time.
+
+
+An in-memory repository is a fake implementation of my repository interface. It behaves like a real repository but stores data in memory, so tests are faster and easier to control.
+
+
+Fake vs stub vs mock
+Type	Meaning	Example
+Stub	Returns fixed data	GetById() always returns the same product
+Fake	Working simplified implementation	In-memory repository using Dictionary<Guid, Product>
+Mock	Checks behaviour/interactions	Verify Add() was called once
+
+
+This is a fake repository. It implements the same IProductRepository interface as the real data layer, but stores products in a Dictionary<Guid, Product>. That makes tests fast and isolated. Because the API depends on the interface, I can swap the real database implementation for the fake in test setup. The limitation is that it does not test real database behaviour like queries, migrations, transactions, constraints, or EF mappings.

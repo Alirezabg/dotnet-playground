@@ -20,3 +20,6 @@ Write your code below in a new `.cs` file in this folder.
 
 ## Interview Tip
 > Strong answer: validate *format/shape* at the boundary (DataAnnotations + `[ApiController]` auto-400), but enforce *business rules* inside the aggregate so the domain is always valid regardless of caller.
+
+
+Validation belongs both at the API boundary and inside the domain. The API validates input format and returns 400 Bad Request for bad requests. The domain enforces business invariants so a Product can never exist in an invalid state, no matter who creates it.
